@@ -1,0 +1,230 @@
+/* pages/historyList/historyList.wxss */
+.main-box {
+  background-image: url('/static/images/bg1.png');
+  background-size: cover;
+  min-height: 100vh;
+  padding: 0rpx;
+  margin: 0rpx;
+  background-color: #efefef;
+}
+.nav-title {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-size: 26rpx;
+  background-color: #6f8aff;
+  padding-top: 60rpx;
+}
+.user-box {
+  width: 100vw;
+  height: 400rpx;
+  background: no-repeat center center url("https://gitee.com/chen-chenghsc/gallery/raw/bd2fc4cea2423bf277b63791cf54bbedb74559b0/%E7%9F%A9%E5%BD%A2%2029@1x.png");
+  background-size: cover;
+  border-bottom-left-radius: 36rpx;
+  border-bottom-right-radius: 36rpx;
+}
+
+.user-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 60rpx;
+}
+
+.avatar-container {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.user-detail {
+  padding-top: 40rpx;
+  margin-left: 30rpx;
+}
+
+.user-name {
+  font-size: 40rpx;
+  // font-weight: bold;
+  color: #fff;
+  display: block;
+}
+
+.user-id {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.8);
+  display: block;
+  margin-top: 10rpx;
+}
+
+.stats-container {
+  width: 84%;
+  margin: 24rpx auto 0rpx;
+  background-color: rgba(255, 255, 255);
+  border-radius: 40rpx;
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  // font-weight: bold;
+  color: #FF8C00;
+  display: block;
+  margin-top: 10rpx;
+}
+.stat-value.default {
+  font-size: 36rpx;
+  // font-weight: bold;
+  color: #444444;
+  display: block;
+  margin-top: 10rpx;
+}
+
+.stat-unit {
+  font-size: 24rpx;
+  color: #9C9C9C;
+}
+
+.type-container {
+  width: 90% !important;
+  height: 130rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0rpx auto 0rpx;
+  border-radius: 30rpx;
+}
+// 类型选择器的下划线去除
+.t-dropdown-menu{
+  position: static !important;
+}
+.t-dropdown-menu__item{
+  padding: 0rpx !important;
+}
+
+.type-label {
+  font-size: 32rpx;
+  color: #444444;
+  margin-right: 20rpx;
+}
+
+.dropdown-menu {
+  margin-right: 20rpx;
+}
+
+.type-item {
+  font-size: 32rpx;
+  color: #666;
+  margin-right: 30rpx;
+}
+
+.type-item.active {
+  color: #708BFF;
+  font-weight: bold;
+}
+
+.list-container {
+
+  background-color: #efefef;
+  // background-color: #aa3c3c !important;
+
+  // padding: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  // height: 580rpx !important;
+  background-color: rgb(237, 237, 237);
+}
+
+.list-item {
+  width: 94%;
+  display: flex;
+  box-sizing: border-box;
+  padding: 20rpx;
+  margin: 20rpx auto;
+  border-radius: 20rpx;
+  background-color: #fff;
+  box-shadow: 0rpx 8rpx 32rpx 0rpx rgba(0, 0, 0, 0.16);
+}
+
+.item-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+}
+
+.item-detail {
+  margin-left: 20rpx;
+  flex: 1;
+  .top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40rpx;
+  }
+}
+
+.item-detail {
+  margin-left: 20rpx;
+  flex: 1;
+}
+
+.item-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.item-date {
+  font-size: 26rpx;
+  color: #999;
+  display: block;
+  margin-top: 10rpx;
+}
+
+.item-location {
+  font-size: 26rpx;
+  color: #999;
+  display: block;
+  margin-top: 10rpx;
+}
+.loading-more {
+  text-align: center;
+  color: #9C9C9C;
+}
+
+
+// 空状态
+.t-empty__image {
+  width: 240rpx !important;
+  height: 240rpx !important;
+  margin-top: 60rpx;
+}

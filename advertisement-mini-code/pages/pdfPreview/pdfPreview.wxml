@@ -1,0 +1,2 @@
+<!--pages/test/test.wxml-->
+<web-view src="{{baseURL}}{{pdfUrl}}"></web-view>

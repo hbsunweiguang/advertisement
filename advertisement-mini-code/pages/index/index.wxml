@@ -1,0 +1,92 @@
+<view class="page-container">
+  <view class="nav-title">
+    户外广告监测系统
+  </view>
+  <!-- 图片展示 -->
+  <image class="banner-image" src="/static/images/loginImg.png" mode="aspectFill"></image>
+
+    <!-- 举报信息查询 -->
+    <view class="queryInfo" bindtap="onReportQuery">
+      <view class="left-box">
+        <image src="/static/icons/f.png" mode="aspectFit" class="img"></image>
+        <view class="titles">举报信息查询</view>
+      </view>
+      <t-icon name="chevron-right" size="48rpx" />
+    </view>
+
+
+  <!-- 列表项 -->
+  <view class="cell-group" style="margin: 20rpx; padding: 0;">
+
+
+    <!-- 禁用违禁用语 -->
+    <navigator class="cell" url="/pages/upload/upload?violationType=1&illegalTypeValue=禁用词类">
+      <view class="left-container">
+        <view class="icon-wrapper icon-purple">
+          <image src="/static/icons/a.png" mode="aspectFill" class="icon-image"></image>
+        </view>
+        <view class="title-container">
+          <view class="title">禁用违禁用语</view>
+          <view class="description" style="font-size: 24rpx; color: #999;">广告使用禁用词汇，如【最、第一、独家、国家级等】</view>
+        </view>
+      </view>
+      <!-- <view class="arrow">→</view> -->
+    </navigator>
+
+    <!-- 虚假宣传 -->
+    <navigator class="cell" url="/pages/upload/upload?violationType=2&illegalTypeValue=虚假宣传">
+      <view class="left-container">
+        <view class="icon-wrapper icon-red">
+          <image src="/static/icons/b.png" mode="aspectFit" class="icon-image"></image>
+        </view>
+        <view class="title-container">
+          <view class="title">虚假宣传</view>
+          <view class="description" style="font-size: 24rpx; color: #999;">广告使用夸大、不实描述、保证性承诺、使用有歧义词汇误导消费者</view>
+        </view>
+      </view>
+      <!-- <view class="arrow">→</view> -->
+    </navigator>
+
+    <!-- 低俗类 -->
+    <navigator class="cell" url="/pages/upload/upload?violationType=3&illegalTypeValue=低俗类">
+      <view class="left-container">
+        <view class="icon-wrapper icon-yellow">
+          <image src="/static/icons/c.png" mode="aspectFit" class="icon-image"></image>
+        </view>
+        <view class="title-container">
+          <view class="title">低俗类</view>
+          <view class="description" style="font-size: 24rpx; color: #999;">广告宣传低俗、色情、有违公序良俗、贬低他人等不良导向</view>
+        </view>
+      </view>
+      <!-- <view class="arrow">→</view> -->
+    </navigator>
+
+    <!-- 敏感类 -->
+    <navigator class="cell" url="/pages/upload/upload?violationType=4&illegalTypeValue=敏感类">
+      <view class="left-container">
+        <view class="icon-wrapper icon-yellow">
+          <image src="/static/icons/d.png" mode="aspectFit" class="icon-image"></image>
+        </view>
+        <view class="title-container">
+          <view class="title">敏感类</view>
+          <view class="description" style="font-size: 24rpx; color: #999;">广告涉嫌政治敏感、暴恐、诈骗、赌博、封建迷信等</view>
+        </view>
+      </view>
+      <!-- <view class="arrow">→</view> -->
+    </navigator>
+
+    <!-- 其他违规 -->
+    <navigator class="cell" url="/pages/upload/upload?violationType=5&illegalTypeValue=其他违规">
+      <view class="left-container">
+        <view class="icon-wrapper icon-yellow">
+          <image src="/static/icons/e.png" mode="aspectFit" class="icon-image"></image>
+        </view>
+        <view class="title-container">
+          <view class="title">其他违规</view>
+          <view class="description" style="font-size: 24rpx; color: #999;">认为有违商业广告发布原则的其他情况，拍摄时请备注</view>
+        </view>
+      </view>
+      <!-- <view class="arrow">→</view> -->
+    </navigator>
+  </view>
+</view>

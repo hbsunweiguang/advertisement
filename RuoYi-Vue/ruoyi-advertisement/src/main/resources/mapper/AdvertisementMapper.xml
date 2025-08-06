@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.advertisement.mapper.AdvertisementMapper">
+
+    <resultMap type="Advertisement" id="AdvertisementResult">
+        <result property="id"    column="id"    />
+        <result property="adProfitabilityType"    column="ad_profitability_type"    />
+        <result property="adIndustryType"    column="ad_industry_type"    />
+        <result property="adMediumType"    column="ad_medium_type"    />
+        <result property="adDescription"    column="ad_description"    />
+        <result property="adImages"    column="ad_images"    />
+        <result property="violationType"    column="violation_type"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="district"    column="district"    />
+        <result property="street"    column="street"    />
+        <result property="address"    column="address"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="advertiser"    column="advertiser"    />
+        <result property="surveyTime"    column="survey_time"    />
+        <result property="surveyor"    column="surveyor"    />
+        <result property="checkStatus"    column="check_status"    />
+        <result property="checkTime"    column="check_time"    />
+        <result property="handleStatus"    column="handle_status"    />
+        <result property="auditStatus"    column="audit_status"    />
+        <result property="report"    column="report"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="createName"    column="createName"    />
+        <result property="updateName"    column="updateName"    />
+    </resultMap>
+
+    <resultMap type="Advertisement" id="AdvertisementAndAuditAndEnforcementResult">
+        <result property="id"    column="id"    />
+        <result property="adProfitabilityType"    column="ad_profitability_type"    />
+        <result property="adIndustryType"    column="ad_industry_type"    />
+        <result property="adMediumType"    column="ad_medium_type"    />
+        <result property="adDescription"    column="ad_description"    />
+        <result property="adImages"    column="ad_images"    />
+        <result property="violationType"    column="violation_type"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="district"    column="district"    />
+        <result property="street"    column="street"    />
+        <result property="address"    column="address"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="advertiser"    column="advertiser"    />
+        <result property="surveyTime"    column="survey_time"    />
+        <result property="surveyor"    column="surveyor"    />
+        <result property="checkStatus"    column="check_status"    />
+        <result property="checkTime"    column="check_time"    />
+        <result property="handleStatus"    column="handle_status"    />
+        <result property="auditStatus"    column="audit_status"    />
+        <result property="report"    column="report"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="createName"    column="createName"    />
+        <result property="updateName"    column="updateName"    />
+        <association property="enforcement"     javaType="Enforcement"         resultMap="EnforcementResult" />
+        <collection  property="auditRecordsList"    javaType="java.util.List"  resultMap="AuditRecordsResult" />
+    </resultMap>
+
+    <resultMap id="AuditRecordsResult" type="AuditRecords">
+        <result property="id"    column="ar_id"    />
+        <result property="adId"    column="ar_ad_id"    />
+        <result property="auditStatus"    column="ar_audit_status"    />
+        <result property="clauseCode"    column="clause_code"    />
+        <result property="auditComments"    column="audit_comments"    />
+        <result property="auditor"    column="auditor"    />
+        <result property="auditTime"    column="audit_time"    />
+        <result property="createBy"    column="ar_create_by"    />
+        <result property="createTime"    column="ar_create_time"    />
+        <result property="updateBy"    column="ar_update_by"    />
+        <result property="updateTime"    column="ar_update_time"    />
+    </resultMap>
+
+    <resultMap id="EnforcementResult" type="Enforcement">
+        <result property="id"    column="en_id"    />
+<!--        <result property="adCode"    column="ad_code"    />-->
+        <result property="adId"    column="en_ad_id"    />
+        <result property="handleResult"    column="handle_result"    />
+        <result property="postHandleImage"    column="post_handle_image"    />
+        <result property="handleTime"    column="handle_time"    />
+        <result property="handler"    column="handler"    />
+        <result property="createBy"    column="en_create_by"    />
+        <result property="createTime"    column="en_create_time"    />
+        <result property="updateBy"    column="en_update_by"    />
+        <result property="updateTime"    column="en_update_time"    />
+    </resultMap>
+
+    <sql id="selectAdvertisementAndAuditAndEnforcementVo">
+        SELECT a.id, a.ad_profitability_type, a.ad_industry_type, a.ad_medium_type, a.ad_description,
+               a.ad_images, a.violation_type, a.province, a.city, a.district, a.street, a.address,
+               a.latitude, a.longitude, a.advertiser, a.survey_time, a.surveyor, a.check_status,
+               a.check_time, a.handle_status, a.audit_status, a.report, a.is_deleted, a.create_by,
+               a.create_time, a.update_by, a.update_time, a.remark ,
+               u1.nick_name createName,u2.nick_name updateName,
+               ar.id ar_id, ar.ad_id ar_ad_id, ar.audit_status ar_audit_status, ar.clause_code,ar.audit_comments,
+               ar.auditor,ar.audit_time,ar.create_by ar_create_by,ar.create_time ar_create_time,
+               ar.update_by ar_update_by,ar.update_time ar_update_time,
+               en.id en_id,en.ad_code,en.ad_id en_ad_id,en.handle_result,en.post_handle_image,en.handle_time,en.handler,
+               en.create_by en_create_by,en.create_time en_create_time,en.update_by en_update_by,en.update_time en_update_time
+        FROM tb_advertisement a
+                 LEFT JOIN sys_user u1 ON u1.user_id=a.create_by
+                 LEFT JOIN sys_user u2 ON u2.user_id=a.update_by
+                 LEFT JOIN tb_audit_records ar ON a.id = ar.ad_id
+                 LEFT JOIN tb_enforcement en ON a.id = en.ad_id
+    </sql>
+
+    <sql id="selectAdvertisementVo">
+        select id, ad_profitability_type, ad_industry_type, ad_medium_type, ad_description,
+               ad_images, violation_type, province, city, district, street, address,
+               latitude, longitude, advertiser, survey_time, surveyor, check_status,
+               check_time, handle_status, audit_status, report, is_deleted, a.create_by,
+               a.create_time, a.update_by, a.update_time, a.remark ,
+               u1.nick_name createName,u2.nick_name updateName
+        from tb_advertisement a
+                 LEFT JOIN sys_user u1 on u1.user_id=a.create_by
+                 LEFT JOIN sys_user u2 on u2.user_id=a.update_by
+    </sql>
+
+    <select id="selectAdvertisementList" parameterType="Advertisement" resultMap="AdvertisementResult">
+        <include refid="selectAdvertisementVo"/>
+        <where>
+            <if test="adProfitabilityType != null  and adProfitabilityType != ''"> and ad_profitability_type = #{adProfitabilityType}</if>
+            <if test="adIndustryTypes != null">
+                <foreach item="adIndustryType" collection="adIndustryTypes" >
+                    AND  ad_industry_type like   concat("%",#{adIndustryType},"%")
+                </foreach>
+            </if>
+            <if test="adMediumTypes != null  ">
+                <foreach item="adMediumType" collection="adMediumTypes" >
+                    AND ad_medium_type like  concat("%",#{adMediumType},"%")
+                </foreach>
+            </if>
+            <if test="adDescription != null  and adDescription != ''"> and ad_description = #{adDescription}</if>
+            <if test="adImages != null  and adImages != ''"> and ad_images = #{adImages}</if>
+            <if test="violationType != null  and violationType != ''"> and violation_type = #{violationType}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="district != null  and district != ''"> and district = #{district}</if>
+            <if test="street != null  and street != ''"> and street = #{street}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="advertiser != null  and advertiser != ''"> and advertiser = #{advertiser}</if>
+            <if test="beginSurveyTime != null "> and survey_time >= #{beginSurveyTime}</if>
+            <if test="endSurveyTime != null "> and survey_time &lt;= #{endSurveyTime}</if>
+            <if test="surveyor != null  and surveyor != ''"> and surveyor = #{surveyor}</if>
+            <if test="checkStatus != null  and checkStatus != ''"> and check_status = #{checkStatus}</if>
+            <if test="checkTime != null "> and check_time = #{checkTime}</if>
+            <if test="handleStatus != null  and handleStatus != ''"> and handle_status = #{handleStatus}</if>
+            <if test="report != null  and report != ''"> and report = #{report}</if>
+            <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>
+            <!-- 查询多个审批状态 -->
+            <if test="auditStatuses != null">
+                and audit_status in
+                <foreach item="auditStatus" collection="auditStatuses" open="(" separator="," close=")">
+                    #{auditStatus}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAdvertisements" parameterType="AdvertisementBody" resultMap="AdvertisementResult">
+        <include refid="selectAdvertisementVo"/>
+        <where>
+            <if test="violationType != null  and violationType != ''"> and a.violation_type = #{violationType}</if>
+            <if test="auditStatus == 0">
+                and a.audit_status in (0, 1, 2, 3, 5)
+            </if>
+            <if test="auditStatus == 1">
+                and a.audit_status in (6, 8)
+            </if>
+            <if test="auditStatus == 2">
+                and a.audit_status in (4, 7)
+            </if>
+            and a.is_deleted = 0 and a.create_by = #{userId}
+        </where>
+    </select>
+
+    <select id="selectAdvertisementById" parameterType="Long" resultMap="AdvertisementResult">
+        <include refid="selectAdvertisementVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectAdvertisementAndAuditAndEnforcementById" parameterType="Long" resultMap="AdvertisementAndAuditAndEnforcementResult">
+        <include refid="selectAdvertisementAndAuditAndEnforcementVo"/>
+        where a.id = #{id} and a.is_deleted = 0
+    </select>
+
+    <insert id="insertAdvertisement" parameterType="Advertisement" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_advertisement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adProfitabilityType != null and adProfitabilityType != ''">ad_profitability_type,</if>
+            <if test="adIndustryType != null and adIndustryType != ''">ad_industry_type,</if>
+            <if test="adMediumType != null and adMediumType != ''">ad_medium_type,</if>
+            <if test="adDescription != null">ad_description,</if>
+            <if test="adImages != null and adImages != ''">ad_images,</if>
+            <if test="violationType != null and violationType != ''">violation_type,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="district != null">district,</if>
+            <if test="street != null">street,</if>
+            <if test="address != null">address,</if>
+            <if test="latitude != null and latitude != ''">latitude,</if>
+            <if test="longitude != null and longitude != ''">longitude,</if>
+            <if test="advertiser != null and advertiser != ''">advertiser,</if>
+            <if test="surveyTime != null">survey_time,</if>
+            <if test="surveyor != null and surveyor != ''">surveyor,</if>
+            <if test="checkStatus != null">check_status,</if>
+            <if test="checkTime != null">check_time,</if>
+            <if test="handleStatus != null">handle_status,</if>
+            <if test="auditStatus != null">audit_status,</if>
+            <if test="report != null">report,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adProfitabilityType != null and adProfitabilityType != ''">#{adProfitabilityType},</if>
+            <if test="adIndustryType != null and adIndustryType != ''">#{adIndustryType},</if>
+            <if test="adMediumType != null and adMediumType != ''">#{adMediumType},</if>
+            <if test="adDescription != null">#{adDescription},</if>
+            <if test="adImages != null and adImages != ''">#{adImages},</if>
+            <if test="violationType != null and violationType != ''">#{violationType},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="district != null">#{district},</if>
+            <if test="street != null">#{street},</if>
+            <if test="address != null">#{address},</if>
+            <if test="latitude != null and latitude != ''">#{latitude},</if>
+            <if test="longitude != null and longitude != ''">#{longitude},</if>
+            <if test="advertiser != null and advertiser != ''">#{advertiser},</if>
+            <if test="surveyTime != null">#{surveyTime},</if>
+            <if test="surveyor != null and surveyor != ''">#{surveyor},</if>
+            <if test="checkStatus != null">#{checkStatus},</if>
+            <if test="checkTime != null">#{checkTime},</if>
+            <if test="handleStatus != null">#{handleStatus},</if>
+            <if test="auditStatus != null">#{auditStatus},</if>
+            <if test="report != null">#{report},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAdvertisement" parameterType="Advertisement">
+        update tb_advertisement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="adProfitabilityType != null and adProfitabilityType != ''">ad_profitability_type = #{adProfitabilityType},</if>
+            <if test="adIndustryType != null and adIndustryType != ''">ad_industry_type = #{adIndustryType},</if>
+            <if test="adMediumType != null and adMediumType != ''">ad_medium_type = #{adMediumType},</if>
+            <if test="adDescription != null">ad_description = #{adDescription},</if>
+            <if test="adImages != null and adImages != ''">ad_images = #{adImages},</if>
+            <if test="violationType != null and violationType != ''">violation_type = #{violationType},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="district != null">district = #{district},</if>
+            <if test="street != null">street = #{street},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="latitude != null and latitude != ''">latitude = #{latitude},</if>
+            <if test="longitude != null and longitude != ''">longitude = #{longitude},</if>
+            <if test="advertiser != null and advertiser != ''">advertiser = #{advertiser},</if>
+            <if test="surveyTime != null">survey_time = #{surveyTime},</if>
+            <if test="surveyor != null and surveyor != ''">surveyor = #{surveyor},</if>
+            <if test="checkStatus != null">check_status = #{checkStatus},</if>
+            <if test="checkTime != null">check_time = #{checkTime},</if>
+            <if test="handleStatus != null">handle_status = #{handleStatus},</if>
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="report != null">report = #{report},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!-- 删除为逻辑删除 -->
+    <update id="deleteAdvertisementById" parameterType="Long">
+        update tb_advertisement set is_deleted=1 where id = #{id}
+    </update>
+    <update id="deleteAdvertisementByIds" parameterType="Long">
+        update tb_advertisement set is_deleted=1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="selectIndustryAndMedium" resultMap="AdvertisementResult">
+        select ad_industry_type, ad_medium_type from tb_advertisement
+    </select>
+
+    <select id="selectCheckCount" resultType="java.lang.Integer">
+        select count(*) from tb_advertisement where check_status = 0 and is_deleted = 0
+    </select>
+
+    <select id="selectApproveCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from tb_advertisement where audit_status = #{auditStatus} and is_deleted = 0
+    </select>
+
+    <select id="selectAddToday" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from tb_advertisement adv left join tb_audit_records ar on adv.id = ar.ad_id
+        <where>
+            <if test="status == 1"> and DATE(adv.survey_time) = CURDATE()</if>
+            <if test="status == 2"> and ar.audit_status in (1,2,3) and adv.audit_status in (1,2,3) and DATE(ar.audit_time) = CURDATE()</if>
+        </where>
+    </select>
+
+    <select id="selectLongTermUntreated" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from tb_advertisement adv left join tb_audit_records ar on adv.id = ar.ad_id
+        <where>
+            <if test="status == 1"> and adv.audit_status = 0 and DATE(adv.survey_time) &lt;= CURDATE() - INTERVAL 2 DAY</if>
+            <if test="status == 2"> and ar.audit_status in (1,2,3) and adv.audit_status in (1,2,3) and DATE(ar.audit_time) &lt;= CURDATE() - INTERVAL 2 DAY</if>
+        </where>
+    </select>
+
+    <!-- 查询地区当月采集广告总量 -->
+    <select id="selectAdvertisementCountByDistrict" resultType="java.util.Map">
+        select district, count(*) count from tb_advertisement
+        WHERE is_deleted = 0
+        AND YEAR(survey_time) = YEAR(CURDATE()) AND MONTH(survey_time) = MONTH(CURDATE())
+        GROUP BY district ORDER BY count desc
+    </select>
+
+    <!-- 查询行业采集广告违法率 -->
+    <select id="selectAdvertisementCountByAuditStatus" resultType="java.util.Map">
+        select district, audit_status, count(*) count from tb_advertisement
+        WHERE is_deleted = 0
+        AND YEAR(survey_time) = YEAR(CURDATE()) AND MONTH(survey_time) = MONTH(CURDATE())
+        GROUP BY district,audit_status ORDER BY count desc
+    </select>
+
+    <!-- 查询行业采集广告地区分布热力 -->
+    <select id="selectIllegalAdvertisementCountByDistrict" resultType="java.util.Map">
+        select district, count(*) count from tb_advertisement
+        WHERE is_deleted = 0 AND audit_status in ('6', '8')
+        GROUP BY district ORDER BY count desc
+    </select>
+
+    <!-- 查询采集广告行业分布 -->
+    <select id="selectAdvertisementCountByIndustry" resultType="java.util.Map">
+        SELECT
+            ad_industry_type AS industry_type,
+            COUNT(*) AS advertisement_count
+        FROM (
+                 SELECT
+                     SUBSTRING_INDEX(SUBSTRING_INDEX(ad_industry_type, ',', numbers.n), ',', -1) AS ad_industry_type
+                 FROM (
+                          SELECT 1 n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5
+                      ) numbers
+                          INNER JOIN tb_advertisement t
+                                     ON CHAR_LENGTH(ad_industry_type) - CHAR_LENGTH(REPLACE(ad_industry_type, ',', '')) >= numbers.n - 1
+                                     WHERE t.is_deleted = 0 AND t.audit_status in ('6', '8')
+             ) AS industry_list
+        GROUP BY ad_industry_type
+        ORDER BY advertisement_count DESC
+    </select>
+
+    <!-- 查询采集广告媒体类型 -->
+    <select id="selectAdvertisementCountByMediumType" resultType="java.util.Map">
+        SELECT
+            ad_medium_type AS medium_type,
+            COUNT(*) AS advertisement_count
+        FROM (
+                 SELECT
+                     SUBSTRING_INDEX(SUBSTRING_INDEX(ad_medium_type, ',', numbers.n), ',', -1) AS ad_medium_type
+                 FROM (
+                          SELECT 1 n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5
+                      ) numbers
+                          INNER JOIN tb_advertisement t
+                                     ON CHAR_LENGTH(ad_medium_type) - CHAR_LENGTH(REPLACE(ad_medium_type, ',', '')) >= numbers.n - 1
+                 WHERE t.is_deleted = 0
+                   AND t.audit_status IN (6, 8)
+             ) AS medium_list
+        GROUP BY ad_medium_type
+        ORDER BY advertisement_count DESC
+    </select>
+
+    <!-- 查询采集广告公益/商业占比 -->
+    <select id="selectAdvertisementCountByProfitabilityType" resultType="java.util.Map">
+        SELECT
+            ad_profitability_type AS profitability_type,
+            COUNT(*) AS count,
+        MONTH(survey_time) AS month
+        FROM tb_advertisement
+        WHERE is_deleted = 0 AND audit_status IN (6, 8)
+          AND YEAR(survey_time) = YEAR(CURDATE())
+          AND ad_profitability_type IS NOT NULL
+          AND ad_profitability_type != ''
+        GROUP BY ad_profitability_type, MONTH(survey_time)
+        ORDER BY ad_profitability_type, month
+    </select>
+
+    <!-- 最新违法广告Top20 -->
+    <select id="selectAdvertisementByTime" resultMap="AdvertisementResult">
+        select id, ad_profitability_type, ad_industry_type, ad_medium_type, ad_description,
+               ad_images, violation_type, province, city, district, street, address,
+               latitude, longitude, advertiser, survey_time, surveyor, check_status,
+               check_time, handle_status, audit_status, report, is_deleted, create_by,
+               create_time, update_by, update_time, remark from tb_advertisement
+        WHERE is_deleted = 0 AND audit_status IN (6, 8) order by survey_time DESC limit 20
+    </select>
+
+    <!--<delete id="deleteAdvertisementById" parameterType="Long">
+        delete from tb_advertisement where id = #{id}
+    </delete>
+
+    <delete id="deleteAdvertisementByIds" parameterType="String">
+        delete from tb_advertisement where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>-->
+    <select id="getCollector" parameterType="Long" >
+        SELECT
+            COUNT(*) AS count,
+            SUM(CASE WHEN audit_status IN ('4','6','7','8') THEN 1 ELSE 0 END) AS handle
+        FROM tb_advertisement
+        WHERE create_by = #{createBy} and is_deleted = 0
+    </select>
+</mapper>

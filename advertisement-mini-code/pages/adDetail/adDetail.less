@@ -1,0 +1,276 @@
+/* pages/adDetail/adDetail.less */
+
+/* 轮播图样式 */
+.banner {
+  height: 360rpx; /* 根据设计图调整高度 */
+  width: 100%;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 信息卡片样式 */
+.info-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 信息行样式 */
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    color: #666; /* 调整标签颜色 */
+    font-size: 28rpx;
+    width: 200rpx;
+    flex-shrink: 0; /* 防止标签被压缩 */
+  }
+
+  .info-value-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+    text-align: right;
+    // text-align: left;
+
+  }
+
+  .info-value {
+    color: #333;
+    font-size: 28rpx;
+    flex: 1;
+    margin-right: 16rpx;
+    word-break: break-all;
+  }
+
+  .arrow-icon {
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 10rpx;
+  }
+}
+
+/* 审核信息样式 */
+.audit-card {
+  .audit-label {
+    color: #666;
+    font-size: 28rpx;
+    margin-bottom: 15rpx;
+    display: block;
+  }
+
+  .audit-content {
+    color: #333;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    background-color: #f9f9f9;
+    padding: 20rpx;
+    border-radius: 10rpx;
+  }
+}
+
+.no-audit {
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+/* 图片网格样式 */
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-top: 15rpx;
+
+  .record-image {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 10rpx;
+  }
+
+  .upload-container {
+    display: flex;
+    gap: 20rpx;
+    padding: 20rpx 0;
+    flex-wrap: wrap;
+  }
+
+  .upload-btn {
+    width: 160rpx;
+    height: 160rpx;
+    border: 2rpx dashed #dddddd;
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+  }
+
+  .camera-icon {
+    color: #999999;
+  }
+}
+
+/* 上传提示样式 */
+.upload-tip {
+  color: #999;
+  font-size: 24rpx;
+  margin-top: 15rpx;
+  display: block;
+}
+
+/* 提交按钮样式 */
+.submit-btn {
+  margin: 40rpx 30rpx;
+  height: 100rpx;
+  background-color: #165DFF;
+  color: #ffffff;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: 500;
+}
+
+/* 通用区域样式 */
+.section {
+  padding: 0 30rpx 20rpx;
+  background-color: #f5f5f5;
+
+  .section-title {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20rpx;
+    display: block;
+    padding-top: 30rpx;
+  }
+}
+
+
+/* 提交按钮区域样式 */
+.submit-area {
+  padding: 30rpx;
+  background-color: #f5f5f5;
+
+  .submit-btn {
+    width: 100%;
+    height: 90rpx;
+    background-color: #1677ff;
+    color: #fff;
+    border-radius: 45rpx;
+    font-size: 32rpx;
+  }
+}
+
+/* 折叠面板样式 */
+.t-collapse {
+  border-radius: 20rpx; /* 设置与采集端信息相同的圆角 */
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+/* 折叠面板项样式 */
+.t-collapse-panel {
+  border-radius: 20rpx; /* 设置与采集端信息相同的圆角 */
+  overflow: hidden; /* 防止内容溢出 */
+
+  &.is-active {
+    .t-collapse-panel__content {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .t-collapse-panel__header {
+    border-radius: 20rpx 20rpx 0 0; /* 设置顶部圆角 */
+  }
+
+  .t-collapse-panel__content {
+    border-bottom-left-radius: 20rpx;
+    border-bottom-right-radius: 20rpx; /* 设置底部圆角 */
+  }
+}
+
+/* 当前状态卡片样式 */
+.status-card {
+  .status-rows {
+    margin: 30rpx 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .status-row {
+    margin-top: 30rpx;
+  }
+  
+  .status-label {
+    color: #666;
+    font-size: 28rpx;
+    margin-bottom: 15rpx;
+    display: block;
+  }
+  
+  .status-values {
+    color: #333;
+    font-size: 28rpx;
+    text-align: right;
+  }
+}
+
+/* 照片列表样式 */
+.photo-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+  gap: 36rpx;
+}
+
+.photo-item {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.photo-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4rpx dashed #A5C1FF;
+  background-color: #fff;
+}
+
+.photo-item-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+  cursor: pointer;
+}

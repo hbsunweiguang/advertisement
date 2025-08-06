@@ -1,0 +1,192 @@
+/* pages/upload/upload.wxss */
+.upload-box {
+  background-color: #ffffff; /* 白色背景 */
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  width: 75%;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.header-tab {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+  position: relative;
+}
+
+.header-tab.active {
+  color: #708bff;
+}
+
+.header-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180rpx; /* 增加下划线宽度 */
+  height: 6rpx;
+  background-color: #708bff;
+  border-radius: 3rpx;
+}
+
+/* 其余样式保持不变 */
+.form-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 2rpx 35rpx;
+}
+
+.form-label {
+  font-size: 30rpx;
+  color: #333;
+  border-bottom: 4rpx solid #EFEFEF;
+}
+
+.form-value {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #666;
+  input {
+    width: 440rpx;
+    // background-color: blue;
+  }
+
+  text {
+    margin-left: 20rpx;
+    width: 440rpx;
+    text-align: right;
+  }
+}
+
+.photo-container {
+  padding: 30rpx 20rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.section-title {
+  font-size: 30rpx;
+  color: #333;
+  border-bottom: 4rpx solid #EFEFEF;
+  margin: 0 0 20rpx 20rpx;
+}
+
+.photo-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+  gap: 36rpx;
+}
+
+.photo-item {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.photo-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4rpx dashed #A5C1FF;
+  background-color: #fff;
+}
+
+.photo-item-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+  cursor: pointer;
+}
+
+.tips {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.submit-btn {
+  background-color: #7993fb !important;
+  color: #ffffff !important;
+  box-shadow: 0rpx 3rpx 3rpx 1rpx rgba(0, 0, 0, 0.16) !important;
+  width: 80%;
+  border-radius: 44rpx !important;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+}
+
+
+.block {
+  width: 100vw;
+  height: 1000rpx;
+  // background: blue;
+  border-top-left-radius: 16rpx;
+  border-top-right-radius: 16rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 116rpx;
+    // background-color: red;
+    
+  }
+
+  .title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36rpx;
+    color: var(--td-text-color-primary);
+  }
+
+  .btn {
+    font-size: 32rpx;
+    padding: 32rpx;
+  }
+
+  .btn--cancel {
+    color: var(--td-text-color-secondary);
+  }
+
+  .btn--confirm {
+    color: #0052d9;
+  }
+  .tag {
+    margin: 4rpx;
+  }
+}
+

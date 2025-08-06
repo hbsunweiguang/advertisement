@@ -1,0 +1,11 @@
+<!--pages/my/my.wxml-->
+<button bind:tap="update">点我</button>
+<view>{{num1}}</view>
+<view>{{num2}}</view>
+<view class="sum">{{sum}}</view>
+
+<t-button theme="primary"  bind:tap="logout">退出登录</t-button>
+
+
+
+

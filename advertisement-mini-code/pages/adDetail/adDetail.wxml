@@ -1,0 +1,131 @@
+<!-- 轮播图区域 -->
+<swiper class="banner" indicator-dots circular autoplay interval="3000">
+  <swiper-item wx:for="{{adImages}}" wx:key="index">
+    <image src="{{item}}" mode="aspectFill" class="banner-img"></image>
+  </swiper-item>
+</swiper>
+
+<!-- 采集端信息 -->
+<view class="section">
+  <text class="section-title">采集端信息</text>
+  <view class="info-card">
+    <view class="info-row">
+      <text class="info-label">盈利类型</text>
+      <view class="info-value-container">
+        <text class="info-value" wx:if="{{adInfo.adProfitabilityType=='1'}}">公益广告</text>
+        <text class="info-value" wx:if="{{adInfo.adProfitabilityType=='2'}}">商业广告</text>
+        <!-- <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon> -->
+      </view>
+    </view>
+    <view class="info-row">
+      <text class="info-label">广告行业</text>
+      <view class="info-value-container">
+        <text class="info-value">{{adInfo.adIndustryType}}</text>
+        <!-- <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon> -->
+      </view>
+    </view>
+    <view class="info-row">
+      <text class="info-label">媒体类型</text>
+      <view class="info-value-container">
+        <text class="info-value">{{adInfo.adMediumType}}</text>
+        <!-- <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon> -->
+      </view>
+    </view>
+
+
+
+    <view class="info-row">
+      <text class="info-label">违法类型</text>
+      <view class="info-value-container">
+        <text class="info-value" wx:if="{{adInfo.violationType ==1}}">禁用词类</text>
+        <text class="info-value" wx:if="{{adInfo.violationType ==2}}">虚假宣传</text>
+        <text class="info-value" wx:if="{{adInfo.violationType ==3}}">低俗类</text>
+        <text class="info-value" wx:if="{{adInfo.violationType ==4}}">敏感类</text>
+        <text class="info-value" wx:if="{{adInfo.violationType ==5}}">其他类</text>
+        <!-- <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon> -->
+      </view>
+    </view>
+
+    <view class="info-row">
+      <text class="info-label">采集时间</text>
+      <view class="info-value-container">
+        <text class="info-value">{{adInfo.createTime}}</text>
+      </view>
+    </view>
+
+    <view class="info-row" bind:tap="goNavigation">
+      <text class="info-label">广告位置</text>
+      <view class="info-value-container">
+        <text class="info-value">{{adInfo.province}}/{{adInfo.city}}/{{adInfo.district}}</text>
+        <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon>
+      </view>
+    </view>
+
+    <view class="info-row">
+      <text class="info-label">违法广告描述</text>
+      <view class="info-value-container">
+        <text class="info-value">{{adInfo.adDescription}}</text>
+        <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon>
+      </view>
+    </view>
+
+    <navigator class="info-row" url="/pages/pdfPreview/pdfPreview?report={{adInfo.report}}">
+      <text class="info-label">审批报告</text>
+      <view class="info-value-container">
+        <text class="info-value">查看报告</text>
+        <t-icon name="chevron-right" size="28rpx" class="arrow-icon"></t-icon>
+      </view>
+    </navigator>
+
+  </view>
+</view>
+
+
+
+<!-- 广告的当前状态 -->
+<view class="section">
+  <text class="section-title">当前状态</text>
+  <!-- 将当前状态内容包裹在新的卡片容器中 -->
+  <view class="info-card status-card">
+    <view class="status-rows">
+      <text class="status-label">处理情况</text>
+      <text class="status-values" wx:if="{{adInfo.enforcement.handleResult=='0'}}">未处理</text>
+      <text class="status-values" wx:if="{{adInfo.enforcement.handleResult=='1'}}">已拆除</text>
+      <text class="status-values" wx:if="{{adInfo.enforcement.handleResult=='2'}}">已罚款</text>
+    </view>
+    <view class="status-row" wx:if="{{adInfo.enforcement.handleResult=='1'}}">
+      <text class="status-label">处理后记录</text>
+        <view class="photo-list">
+            <view class="photo-item" wx:for="{{afterProcessingImages}}" wx:key="index">
+                <image src="{{item}}" mode="aspectFill" bind:tap="previewImage" data-image="{{item}}"></image>
+            </view>
+        </view>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 审核端信息 -->
+<view class="section">
+  <text class="section-title">审核端信息</text>
+
+  <block wx:if="{{adInfo.auditRecordsList.length !== 0}}">
+    <view class="audit-card" wx:for="{{adInfo.auditRecordsList}}" wx:key="index">
+      <!-- 修改: 使用 t-collapse 组件包裹审批意见 -->
+      <t-collapse value="{{activeNames}}" bindchange="handleCollapseChange">
+        <t-collapse-panel  header="审批意见{{index+1}}">
+
+          <view class="audit-content">审核时间：{{item.updateTime}}</view>
+          <view class="audit-content" wx:if="{{item.content}}">涉及法规：{{item.content}}</view>
+          <view class="audit-content" wx:if="{{item.auditComments}}">{{item.auditComments}}</view>
+        </t-collapse-panel>
+      </t-collapse>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="no-audit">暂无审核记录</view>
+  </block>
+
+
+</view>

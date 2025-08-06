@@ -1,0 +1,201 @@
+<!--pages/upload/upload.wxml-->
+<view class="upload-box">
+  <view class="header">
+    <view class="header-tab {{adProfitabilityType === '1' ? 'active' : ''}}" bindtap="switchTab" data-tab="1">
+      公益
+    </view>
+    <view class="header-tab {{adProfitabilityType === '2' ? 'active' : ''}}" bindtap="switchTab" data-tab="2">
+      商业
+    </view>
+  </view>
+
+<!-- 行业分类 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>行业分类</text>
+    </view>
+    <view class="form-value" bindtap="navigateToIndustry">
+      <text style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{adIndustryType || '请选择行业分类'}}</text>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+<!-- 媒体类型 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>媒体类型</text>
+    </view>
+    <view class="form-value" bindtap="navigateToMediaType">
+      <text style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{adMediumType || '请选择媒体类型'}}</text>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+<!-- 广告位置 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>广告位置</text>
+    </view>
+    <view class="form-value" bindtap="navigateToAdPosition">
+      <text>{{adPositionValue || '请选择广告位置'}}</text>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+<!-- 详细地址 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>详细地址</text>
+    </view>
+    <view class="form-value" >
+      <input type="text" style="text-align: right;" placeholder="请在此输入内容" model:value="{{address}}"/>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+<!-- 现场照片 -->
+  <view class="photo-container">
+    <text class="section-title">现场照片</text>
+    <view class="photo-list">
+      <view class="photo-item" wx:for="{{adImages}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" bind:tap="previewImage" data-image="{{item}}"></image>
+        <view class="photo-item-delete" bindtap="deletePhoto" data-index="{{index}}">
+          <t-icon name="close" size="20rpx" color="#fff"></t-icon>
+        </view>
+      </view>
+      <view class="photo-item upload-btn" bindtap="uploadPhoto" wx:if="{{adImages.length < 3}}">    
+        <t-icon name="camera" size="40rpx" color="#a9c4f9"></t-icon>
+      </view>
+    </view>
+    <text class="tips">*请上传至少两张图片,反映问题的近景和确认位置的远景,能清晰显示要上报的问题</text>
+  </view>
+
+<!-- 违法广告描述 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>违法广告描述</text>
+    </view>
+    <view class="form-value" >
+      <input type="text" style="text-align: right;" placeholder="请在此输入内容" model:value="{{adDescription}}"/>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+<!-- 广告主 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>广告主</text>
+    </view>
+    <view class="form-value" >
+      <input type="text" style="text-align: right;" placeholder="请在此输入内容" model:value="{{advertiser}}"/>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+<!-- 违法类别 -->
+  <view class="form-item">
+    <view class="form-label">
+      <text>违法类别</text>
+    </view>
+    <view class="form-value" bindtap="navigateToIllegalType">
+      <text>{{illegalTypeValue || '请选择违法类别'}}</text>
+      <t-icon name="chevron-right" size="50rpx" color="#A4A4A4" />
+    </view>
+  </view>
+
+
+
+<!-- 提交 -->
+  <t-button type="primary" t-class="submit-btn" bind:tap="handleSubmitAd">提交</t-button>
+</view>
+
+
+
+<!-- 行业弹框 -->
+<t-popup visible="{{visible}}" placement="bottom">
+  <view class="block">
+    <view class="header">
+      <view class="btn btn--cancel" aria-role="button" bindtap="closeIndustryPopup">取消</view>
+      <view class="title">行业分类</view>
+      <view class="btn btn--confirm" aria-role="button" bindtap="closeIndustryPopup">确定</view>
+    </view>
+
+    <!-- tag 列表 -->
+    <view class="wrapper">
+        <view class="block">
+          <t-tag class="tag" variant="outline" theme="primary" icon="add" size="large" bind:tap="showIndustryDialog">添加行业</t-tag>
+          <block wx:for="{{tagList}}" wx:key="index">
+            <t-check-tag  bind:change="handleIndustryTagChange" bind:close="handleIndustryTagClose" data-selected-tag="{{item}}" data-index="{{index}}" class="tag" size="large"  content="{{item}}" />
+          </block>
+        </view>
+    </view>
+  </view>
+</t-popup>
+
+<!-- 新增行业弹窗 -->
+ <t-dialog
+  visible="{{showWithIndustryInput}}"
+  title="新增行业"
+  confirm-btn="确定"
+  cancel-btn="取消"
+  bind:confirm="confirmIndustryDialog"
+  bind:cancel="closeIndustryDialog"
+>
+  <t-input
+    borderless
+    class="dialog-input"
+    clearable
+    slot="content"
+    model:value="{{inputIndustryValue}}"
+    placeholder="请输入行业名称"
+    maxlength="12"
+    show-word-limit="true"
+    placeholder-class="placeholder"
+  />
+</t-dialog>
+
+
+<!-- ****************媒体类型**************** -->
+
+<!-- 媒体类型弹框 -->
+<t-popup visible="{{mediaTypeVisible}}" placement="bottom">
+  <view class="block">
+    <view class="header">
+      <view class="btn btn--cancel" aria-role="button" bindtap="closeMediaTypePopup">取消</view>
+      <view class="title">媒体类型</view>
+      <view class="btn btn--confirm" aria-role="button" bindtap="closeMediaTypePopup">确定</view>
+    </view>
+
+    <!-- tag 列表 -->
+    <view class="wrapper">
+      <view class="block">
+        <t-tag class="tag" variant="outline" theme="primary" icon="add" size="large" bind:tap="showMediaTypeDialog">添加媒体类型</t-tag>
+        <block wx:for="{{mediaTypeTagList}}" wx:key="index">
+          <t-check-tag  bind:change="handleMediaTypeTagChange" bind:close="handleMediaTypeTagClose" data-selected-tag="{{item}}" data-index="{{index}}" class="tag" size="large"  content="{{item}}" />
+        </block>
+      </view>
+    </view>
+  </view>
+</t-popup>
+
+<!-- 新增媒体类型弹窗 -->
+ <t-dialog
+  visible="{{showWithMediaInput}}"
+  title="新增媒体类型"
+  confirm-btn="确定"
+  cancel-btn="取消"
+  bind:confirm="confirmMediaDialog"
+  bind:cancel="closeMediaDialog"
+>
+  <t-input
+    borderless
+    class="dialog-input"
+    clearable
+    slot="content"
+    model:value="{{inputMediaValue}}"
+    placeholder="请输入媒体类型名称"
+    maxlength="12"
+    show-word-limit="true"
+    placeholder-class="placeholder"
+  />
+</t-dialog>

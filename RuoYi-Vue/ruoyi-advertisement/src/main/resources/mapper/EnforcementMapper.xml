@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.advertisement.mapper.EnforcementMapper">
+
+    <resultMap type="Enforcement" id="EnforcementResult">
+        <result property="id"    column="id"    />
+        <result property="adCode" column="ad_code"/>
+        <result property="adId"    column="ad_id"    />
+        <result property="handleResult"    column="handle_result"    />
+        <result property="postHandleImage"    column="post_handle_image"    />
+        <result property="handleTime"    column="handle_time"    />
+        <result property="handler"    column="handler"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+<!--        以下为广告属性-->
+        <result property="adProfitabilityType"    column="adProfitabilityType"    />
+        <result property="adIndustryType"    column="adIndustryType"    />
+        <result property="adMediumType"    column="adMediumType"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="district"    column="district"    />
+        <result property="street"    column="street"    />
+    </resultMap>
+
+    <sql id="selectEnforcementVo">
+        select id, ad_code,ad_id, handle_result, post_handle_image, handle_time, handler, create_by, create_time, update_by, update_time from tb_enforcement
+    </sql>
+    <sql id="selectEnforcementAndAdvertisementAll">
+        select a.ad_images as adImages, ad_profitability_type as adProfitabilityType,ad_industry_type as adIndustryTypes,ad_medium_type as adMediumTypes, a.province , a.city, a.district, a.street, a.address,
+               enfo.id, enfo.ad_code as adCode,enfo.ad_id as adId, handle_result as handleResult, post_handle_image as postHandleImage, handle_time as handleTime,
+               handler, enfo.create_by as createBy, enfo.create_time as createTime, enfo.update_by as updateBy, enfo.update_time as updateTime
+        from tb_enforcement enfo
+                 left join tb_advertisement a on enfo.ad_id = a.id
+    </sql>
+    <sql id="selectEnforcementAndAdvertisementVo">
+        select a.ad_images as adImages, a.violation_type as violationType, a.province , a.city, a.district, a.street, a.address,
+               a.survey_time as surveyTime, a.surveyor, a.check_status as checkStatus,
+               a.handle_status as handleStatus,
+               enfo.id, enfo.ad_code as adCode,enfo.ad_id as adId, handle_result as handleResult, post_handle_image as postHandleImage, handle_time as handleTime,
+               handler, enfo.create_by as createBy, enfo.create_time as createTime, enfo.update_by as updateBy, enfo.update_time as updateTime
+        from tb_enforcement enfo
+                 left join tb_advertisement a on enfo.ad_id = a.id
+    </sql>
+    <select id="selectEnforcementList" parameterType="Enforcement" resultType="Map">
+        <include refid="selectEnforcementAndAdvertisementAll"/>
+        <where>
+            <if test="adProfitabilityType != null  and adProfitabilityType != ''"> and ad_profitability_type = #{adProfitabilityType}</if>
+            <if test="adIndustryTypes != null">
+                <foreach item="adIndustryType" collection="adIndustryTypes" >
+                    AND  ad_industry_type like   concat("%",#{adIndustryType},"%")
+                </foreach>
+            </if>
+            <if test="adMediumTypes != null  ">
+            <foreach item="adMediumType" collection="adMediumTypes" >
+                AND ad_medium_type like  concat("%",#{adMediumType},"%")
+            </foreach>
+            </if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="district != null  and district != ''"> and district = #{district}</if>
+            <if test="street != null  and street != ''"> and street = #{street}</if>
+            <if test="adId != null "> and ad_id = #{adId}</if>
+             <if test="adCode != null">and ad_code = #{adCode}</if>
+            <if test="handleResult != null  and handleResult != ''"> and handle_result = #{handleResult}</if>
+            <if test="postHandleImage != null  and postHandleImage != ''"> and post_handle_image = #{postHandleImage}</if>
+            <if test="handleTime != null "> and handle_time = #{handleTime}</if>
+            <if test="handler != null  and handler != ''"> and handler = #{handler}</if>
+        </where>
+    </select>
+
+    <select id="selectEnforcementById" parameterType="Long" resultMap="EnforcementResult">
+        <include refid="selectEnforcementVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEnforcement" parameterType="Enforcement" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_enforcement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adId != null">ad_id,</if>
+            <if test="adCode != null">ad_code,</if>
+            <if test="handleResult != null">handle_result,</if>
+            <if test="postHandleImage != null">post_handle_image,</if>
+            <if test="handleTime != null">handle_time,</if>
+            <if test="handler != null">handler,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adId != null">#{adId},</if>
+            <if test="adCode != null">#{adCode},</if>
+            <if test="handleResult != null">#{handleResult},</if>
+            <if test="postHandleImage != null">#{postHandleImage},</if>
+            <if test="handleTime != null">#{handleTime},</if>
+            <if test="handler != null">#{handler},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateEnforcement" parameterType="Enforcement">
+        update tb_enforcement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="adId != null">ad_id = #{adId},</if>
+            <if test="handleResult != null">handle_result = #{handleResult},</if>
+            <if test="postHandleImage != null">post_handle_image = #{postHandleImage},</if>
+            <if test="handleTime != null">handle_time = #{handleTime},</if>
+            <if test="handler != null">handler = #{handler},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="adId != null">and ad_id = #{adId}</if>
+        </where>
+    </update>
+
+    <delete id="deleteEnforcementById" parameterType="Long">
+        delete from tb_enforcement where id = #{id}
+    </delete>
+
+    <delete id="deleteEnforcementByIds" parameterType="String">
+        delete from tb_enforcement where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectEnforcementByAdId" parameterType="Long" resultMap="EnforcementResult">
+        <include refid="selectEnforcementVo"/>
+        where ad_id = #{adId}
+    </select>
+    <select id="selectEnforcementAll" parameterType="Enforcement" resultType="Map">
+        <include refid="selectEnforcementAndAdvertisementVo"/>
+        <where>
+            <if test="adId != null">and tb_advertisement.id = #{adId}</if>
+            <if test="createBy !=null">and enfo.create_by = #{createBy}</if>
+            <if test="violationType != null">and violation_type = #{violationType}</if>
+            <if test="handleResult !=null">and handle_result = #{handleResult}</if>
+        </where>
+    </select>
+
+    <select id="selectEnforcementByUserIds" resultType="Enforcement">
+        SELECT
+        u.create_by AS createBy,
+        COALESCE(e.count, 0) AS task_count
+        FROM (
+        <foreach collection="userIds" item="userId" separator=" UNION ALL ">
+            SELECT #{userId} AS create_by
+        </foreach>
+        ) u
+        LEFT JOIN (
+        SELECT create_by, COUNT(*) AS count
+        FROM tb_enforcement
+        WHERE create_by IN
+        <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+        GROUP BY create_by
+        ) e ON u.create_by = e.create_by
+        ORDER BY task_count ASC
+        LIMIT 1
+    </select>
+
+    <select id="selectAddTodayByHandle" resultType="java.lang.Integer">
+        select count(*) from tb_enforcement where DATE(create_time) = CURDATE() and handle_result = 0
+    </select>
+
+    <select id="selectHandleCount" resultType="java.lang.Integer">
+        select count(*) from tb_enforcement where handle_result = 0
+    </select>
+
+    <select id="selectLongTermUntreatedByHandle" resultType="java.lang.Integer">
+        select count(*) from tb_enforcement where handle_result = 0 and DATE(create_time)  &lt;= CURDATE() - INTERVAL 2 DAY
+    </select>
+
+    <select id="getHandler" parameterType="Long" resultType="java.util.Map">
+        SELECT
+            COUNT(*) AS count,
+            SUM(CASE WHEN handle_result IN (1, 2) THEN 1 ELSE 0 END) AS handle
+        FROM tb_enforcement
+        WHERE create_by = #{userId}
+    </select>
+</mapper>

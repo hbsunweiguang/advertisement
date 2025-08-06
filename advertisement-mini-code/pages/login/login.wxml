@@ -1,0 +1,28 @@
+<view class="login-container">
+
+  <view class="login-form">
+    <view class="form-title">
+      <image class="login-icon" src="/static/images/loginImg.png"></image>
+    </view>
+    
+    <view class="role-select-group">
+      <view class="role-item {{roleKey === 'collect' ? 'active' : ''}}" bind:tap="onRoleSelect" data-role-key="collect">
+        数据采集者
+      </view>
+      <view class="role-item {{roleKey === 'handle' ? 'active' : ''}}" bind:tap="onRoleSelect" data-role-key="handle">
+        执法处理者
+      </view>
+    </view>
+    
+    <view class="form-field">
+      <t-input type="text" placeholder="账号" model:value="{{username}}" 	/>
+    </view>
+    
+    <view class="form-field">
+      <t-input type="password" placeholder="密码" model:value="{{password}}" 	/>
+    </view>
+    
+    <button class="submit-btn" bind:tap="onSubmit">登录</button>
+
+  </view>
+</view>

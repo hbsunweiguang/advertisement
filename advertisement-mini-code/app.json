@@ -1,0 +1,37 @@
+{
+  "entryPagePath": "pages/login/login",
+  "pages": [
+    "pages/adDetail/adDetail",
+    "pages/adHandle/adHandle",
+    "pages/pdfPreview/pdfPreview",
+    "pages/chart/chart",
+    "pages/historyList/historyList",
+    "pages/enforcementList/enforcementList",
+    "pages/upload/upload",
+    "pages/index/index",
+    "pages/login/login",
+    "pages/my/my"
+  ],
+  "window": {
+    "navigationBarTitleText": "户外广告监测系统",
+    "navigationBarBackgroundColor": "#708bff"
+  },
+  "resolveAlias":{
+    "@/*":"/*"
+  },
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "ec-canvas": "./ec-canvas/ec-canvas"
+  },
+
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseAddress",
+    "chooseLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "当前需要获取你的经纬度"
+    }
+  }
+}

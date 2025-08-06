@@ -1,0 +1,42 @@
+<view class="page-container">
+  <!-- 图片展示 -->
+  <image class="banner-image" src="/static/images/loginImg.png" mode="aspectFill"></image>
+
+  <!-- 列表项 -->
+  <t-cell-group style="margin: 20rpx; padding: 0;">
+    <!-- 举报信息查询 -->
+    <t-cell bind:tap="onReportQuery" arrow class="custom-cell">
+      <view slot="left" class="icon-wrapper icon-blue">
+        <image src="/static/icons/a.png" mode="aspectFit" class="custom-icon"></image>
+      </view>
+      <view slot="title" class="custom-title">举报信息查询</view>
+    </t-cell>
+
+    <!-- 禁用违禁用语 -->
+    <t-cell arrow class="custom-cell"> 
+      <view slot="left" class="icon-wrapper icon-purple">
+        <image src="/static/icons/b.png" mode="aspectFit" class="custom-icon"></image>
+      </view>
+      <view slot="title" class="custom-title">禁用违禁用语</view>
+      <view slot="description" class="custom-description">广告使用不符合规范的词汇</view>
+    </t-cell>
+
+    <!-- 虚假宣传 -->
+    <t-cell arrow class="custom-cell">
+      <view slot="left" class="icon-wrapper icon-red">
+        <image src="/static/icons/c.png" mode="aspectFit" class="custom-icon"></image>
+      </view>
+      <view slot="title" class="custom-title">虚假宣传</view>
+      <view slot="description" class="custom-description">广告内容与实际情况不符</view>
+    </t-cell>
+
+    <!-- 低俗类 -->
+    <t-cell arrow class="custom-cell">
+      <view slot="left" class="icon-wrapper icon-yellow">
+        <image src="/static/icons/d.png" mode="aspectFit" class="custom-icon"></image>
+      </view>
+      <view slot="title" class="custom-title">低俗类</view>
+      <view slot="description" class="custom-description">广告含有不适当内容</view>
+    </t-cell>
+  </t-cell-group>
+</view>

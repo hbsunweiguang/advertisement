@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "echarts": "^5.6.0",
+    "mobx-miniprogram": "^6.12.3",
+    "mobx-miniprogram-bindings": "^5.1.1",
+    "tdesign-miniprogram": "^1.9.7",
+    "wx-request-plus": "^1.0.18"
+  }
+}

@@ -1,0 +1,114 @@
+<!--pages/historyList/historyList.wxml-->
+<view class="main-box">
+  <view class="user-box">
+    <!-- 顶部用户信息区域 -->
+    <view class="user-info">
+      <view class="avatar-container">
+        <image class="avatar" src="/static/images/loginImg.png"></image>
+      </view>
+      <view class="user-detail" bindtap="onClickAvatar">
+        <text class="user-name">{{nickName}}</text>
+        <text class="user-id">{{phonenumber}}</text>
+      </view>
+    </view>
+
+    <!-- 统计数据区域 -->
+    <view class="stats-container">
+      <view class="stat-item">
+        <text class="stat-label">累计举报</text>
+        <view class="stat-value">
+          {{count}}
+          <text class="stat-unit">条</text>
+        </view>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">累计完成</text>
+        <view class="stat-value default">
+          {{handle}}
+          <text class="stat-unit">条</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 类型选择区域 -->
+  <view class="type-container">
+    <text class="type-label">类型</text>
+    <t-dropdown-menu class="dropdown-menu">
+      <t-dropdown-item
+        options="{{typeOptions}}"
+        value="{{violationType}}"
+        bind:change="onTypeChange"
+      />
+    </t-dropdown-menu>
+    <!-- 添加点击事件和状态判断 -->
+    <text 
+      class="type-item {{auditStatus === '0' ? 'active' : ''}}" 
+      data-status="0" 
+      bindtap="onStatusChange"
+    >审核中</text>
+    <text 
+      class="type-item {{auditStatus === '1' ? 'active' : ''}}" 
+      data-status="1" 
+      bindtap="onStatusChange"
+    >已通过</text>
+    <text 
+      class="type-item {{auditStatus === '2' ? 'active' : ''}}" 
+      data-status="2" 
+      bindtap="onStatusChange"
+    >未通过</text>
+  </view>
+
+  <!-- 列表区域 -->
+  <!-- // 修改: 使用scroll-view组件包装列表，添加上下拉功能 -->
+  <scroll-view 
+    class="list-container"
+    scroll-y="true"
+    lower-threshold="100rpx"
+    style="height: calc(100vh - 550rpx)"
+    bindscrolltolower="onReachBottom"
+    refresher-enabled="true"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onPullDownRefresh"
+  >
+    <block wx:for="{{historyList}}" wx:key="id">
+      <navigator class="list-item" url="/pages/adDetail/adDetail?id={{item.id}}">
+        <!-- 直接使用处理后的图片路径 -->
+        <image 
+          class="item-image" 
+          src="{{item.processedAdImage}}"
+        ></image>
+        <view class="item-detail">
+          <view class="top-content">
+            <text class="item-title" wx:if="{{item.violationType == '1'}}">禁用词类</text>
+            <text class="item-title" wx:if="{{item.violationType == '2'}}">虚假宣传</text>
+            <text class="item-title" wx:if="{{item.violationType == '3'}}">低俗类</text>
+            <text class="item-title" wx:if="{{item.violationType == '4'}}">敏感类</text>
+            <text class="item-title" wx:if="{{item.violationType == '5'}}">其他类</text>
+            
+            <text class="item-date">{{item.createTime}}</text>
+          </view>
+          <view class="item-location">{{item.province}} {{item.city}} {{item.district}} {{item.street}}</view>
+        </view>
+      </navigator>
+    </block>
+
+    <t-empty wx:if="{{!historyList.length}}" t-class="empty-cls" t-class-image="t-empty__image" image="https://tdesign.gtimg.com/mobile/demos/empty1.png" description="暂无记录" />
+
+    <!-- 加载更多提示 -->
+    <view class="loading-more" wx:if="{{loadingMore}}">
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+</view>
+
+
+<t-dialog
+  visible="{{showConfirm}}"
+  title="退出登录"
+  content="确定要退出登录吗？"
+  confirm-btn="确定"
+  cancel-btn="取消"
+  bind:confirm="confirmQuit"
+  bind:cancel="closeDialog"
+/>
